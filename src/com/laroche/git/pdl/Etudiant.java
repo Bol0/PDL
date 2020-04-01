@@ -2,19 +2,35 @@ package com.laroche.git.pdl;
 
 public class Etudiant extends Personne{
 
-	private boolean filiere; //true --> classique, false --> alternance 
+	private boolean filiere; //true --> classique, false --> alternance
+	private int groupe;
 	
-	public Etudiant(String prenom, String nom, boolean filiere) {
+	public Etudiant(String prenom, String nom, boolean filiere, int groupe) {
 		super(nom, prenom);
 		this.filiere = filiere;
+		this.groupe = groupe;
+	}
+	
+	public Etudiant(String prenom, String nom) {
+		super(nom,prenom);
+		filiere = true;
+		groupe = 0;
 	}
 	
 	public boolean getFiliere() {
 		return this.filiere;
 	}
 	
+	public int getGroupe() {
+		return this.groupe;
+	}
+	
 	public void setFiliere(boolean filiere) {
 		this.filiere = filiere;
+	}
+	
+	public void setGroupe(int numero) {
+		this.groupe = numero;
 	}
 	
 }

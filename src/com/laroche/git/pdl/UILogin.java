@@ -59,6 +59,7 @@ public class UILogin extends JFrame implements ActionListener{
 		JPMDP.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		JPMDP.setBounds(204, 96, 203, 26);
 		this.getContentPane().add(JPMDP);
+		JPMDP.addActionListener(this);
 		
 		JLErreur = new JLabel("");
 		JLErreur.setForeground(Color.RED);
@@ -67,7 +68,7 @@ public class UILogin extends JFrame implements ActionListener{
 		this.getContentPane().add(JLErreur);
 		
 		BTValider = new JButton("Valider");
-		BTValider.setBounds(181, 162, 87, 29);
+		BTValider.setBounds(181, 145, 87, 29);
 		this.getContentPane().add(BTValider);
 		BTValider.addActionListener(this);
 		
@@ -121,13 +122,13 @@ public class UILogin extends JFrame implements ActionListener{
 							this.setVisible(false);
 							this.dispose();
 							new UIEtudiant(Integer.parseInt(result.get(0).get(0)));
+							//result.get(0).get(4),result.get(0).get(5)
 							break;
 						case "enseignant":
 							
 							break;
 						default:
-						    JOptionPane jop3 = new JOptionPane();
-						    jop3.showMessageDialog(null, "Statut inexistant !\nFermeture de l'application", "Erreur", JOptionPane.ERROR_MESSAGE);
+						    JOptionPane.showMessageDialog(null, "Statut inexistant !\nFermeture de l'application", "Erreur", JOptionPane.ERROR_MESSAGE);
 						    this.setVisible(false);
 						    this.dispose();
 						    System.exit(0);
@@ -142,6 +143,10 @@ public class UILogin extends JFrame implements ActionListener{
 					addErreur("Email invalide");
 				}
 			}
+		}
+		
+		if(e.getSource() == JPMDP) {
+			BTValider.doClick();
 		}
 	}
 	

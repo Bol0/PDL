@@ -22,6 +22,6 @@ class BackgroundPanel extends JPanel{
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		if(image != null)
-			g.drawImage(image, 0,0,450,this.getHeight()+100,this);
+			g.drawImage(image, 0,0,this.getWidth(),this.getHeight()+100,this);
 	}
 }

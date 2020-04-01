@@ -2,10 +2,10 @@ package com.laroche.git.pdl;
 
 public class Seance {
 	
-	private String date,heure,salle,type;
-	int duree; //en minutes
+	private String date,salle,type;
+	int duree,heure; //en heure
 	
-	public Seance(String date, String heure, String salle, String type, int duree){
+	public Seance(String date, int heure, String salle, String type, int duree){
 		this.date = date;
 		this.heure = heure;
 		this.salle = salle;
@@ -21,11 +21,11 @@ public class Seance {
 		this.date = date;
 	}
 
-	public String getHeure() {
+	public int getHeure() {
 		return heure;
 	}
 
-	public void setHeure(String heure) {
+	public void setHeure(int heure) {
 		this.heure = heure;
 	}
 

@@ -12,7 +12,7 @@ public class Main {
 	public static void main(String[] args) throws SQLException {
 		// tente de se connecter a la bdd afin de verifier la connection
 		UILogin log = new UILogin();
-		UIEtudiant student = new UIEtudiant(3);
+		//UIEtudiant student = new UIEtudiant(3,"Jean","Bon");
 		//BDD db = new BDD();
 		//System.out.println(db.isConnected());
 		/*ArrayList<ArrayList<String>> result = db.request("SELECT * FROM UTILISATEUR",6);

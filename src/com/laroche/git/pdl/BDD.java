@@ -65,14 +65,13 @@ public class BDD {
 	
 	public ArrayList<ArrayList<String>> request(String request,int row) {
 		ArrayList<ArrayList<String>> buff = new ArrayList<ArrayList<String>>();
-		ArrayList<String> buff2 = new ArrayList<String>();
 		if(isConnected()) {
 		    try (Statement statement = connection.createStatement()) {      
 		        try (ResultSet resultSet = statement
 		            .executeQuery(request)) {
 		        	
 		          while (resultSet.next()) {
-		        	  buff2.clear();
+		        	  ArrayList<String> buff2 = new ArrayList<String>();
 		          	for(int i = 1; i <= row; i++) {
 		          		buff2.add(resultSet.getString(i));
 		          	}
@@ -85,9 +84,6 @@ public class BDD {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 		      }
-		}else {
-			buff2.add("null");
-			buff.add(buff2);
 		}
 		return buff;
 	}

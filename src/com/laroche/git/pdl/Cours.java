@@ -5,14 +5,16 @@ import java.util.ArrayList;
 public class Cours {
 	
 	private String matiere;
-	private int masseHoraire;
+	private int masseHoraire,idCours;
 	private int tauxAbsence = 0;
 	private ArrayList<Seance> seances;
+
 	
-	public Cours(String matiere, int masseHoraire) {
+	public Cours(String matiere, int masseHoraire,int idCours) {
 		this.matiere = matiere;
 		this.masseHoraire = masseHoraire;
 		seances = new ArrayList<Seance>();
+		this.idCours = idCours;
 		
 	}
 	
@@ -34,6 +36,10 @@ public class Cours {
 	
 	public void removeSeance(Seance seance) {
 		this.seances.remove(seance);
+	}
+	
+	public void setSeances(ArrayList<Seance> seances) {
+		this.seances = seances;
 	}
 	
 	public String getMatiere() {

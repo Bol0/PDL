@@ -20,7 +20,7 @@ public class Groupe {
 		return numero;
 	}
 	
-	public ArrayList<Cours> getEtudiants(){
+	public ArrayList<Cours> getCours(){
 		return this.cours;
 	}
 	
@@ -37,6 +37,10 @@ public class Groupe {
 	}
 	
 	public void removeCours(Cours cours) {
-		this.cours.remove(cours);
+			this.cours.remove(cours);
+	}
+	
+	public void clearCours() {
+		this.cours.clear();
 	}
 }
