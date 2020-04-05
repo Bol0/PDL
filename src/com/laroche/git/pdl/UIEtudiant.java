@@ -24,27 +24,36 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 
 public class UIEtudiant extends JFrame implements ActionListener{
 	
 	private int userID;
-	private JButton JBProfil,JBPlanning,JBAbsences,JBNotes,JBDeconnexion;
+	private JButton JBProfil,JBPlanning,JBAbsences,JBNotes,JBDeconnexion,JBJustifier_absence,JBAnticiper_absence;
 	private JPanel content,JPProfil,JPPlanning,JPAbsences,JPNotes;
 	private String[] listeCard = {"card_profil", "card_planning", "card_absences","card_notes"};
 	private CardLayout cardLayoutCentre = new CardLayout();
 	private Etudiant profil;
 	private Groupe groupe;
 	private ArrayList<Cours> cours;
+	private JLabel absencesErreur;
+	private JTable JTAbsences;
+	private ArrayList<Absences> absences;
+	private ArrayList<Seance> totSeances;
+	private DefaultTableModel modelTableAbsences;
 	
 	public UIEtudiant(int userID) {
 		this.userID = userID;
+		totSeances = new ArrayList<Seance>();
+		modelTableAbsences = new DefaultTableModel();
 		
 		//enregistre le profil de l'etudiant
 		this.profil = new BDDEtudiant(this.userID).getEtudiant();
@@ -54,6 +63,9 @@ public class UIEtudiant extends JFrame implements ActionListener{
 		
 		//récupération des cours
 		cours = this.groupe.getCours();
+		
+		//récupération des absences
+		absences = new BDDAbsencesEleve(this.profil.getID()).getAbsences();
 		
 		
 		this.setSize(550, 300);
@@ -164,6 +176,7 @@ public class UIEtudiant extends JFrame implements ActionListener{
 		for(int i = 0; i < cours.size(); i++) {
 			ArrayList<Seance> seances = cours.get(i).getSeances(); 
 			for(int ii = 0; ii < seances.size();ii++) {
+				totSeances.add(seances.get(ii));
 				Seance seance = seances.get(ii);
 				int jours = 1;
 				int horaire = seance.getHeure()-7;
@@ -242,11 +255,42 @@ public class UIEtudiant extends JFrame implements ActionListener{
 		});
 		
 		
+		//affichage des absences **************************************
+		JPAbsences.setLayout(new BorderLayout());
 		
+		//ajout du panel du bas avec ses boutons
+		JPanel panel3 = new JPanel();
+		JPAbsences.add(panel3, BorderLayout.SOUTH);
+		panel3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		JBAnticiper_absence = new JButton("Anticiper absence");
+		panel3.add(JBAnticiper_absence);
+		JBAnticiper_absence.addActionListener(this);
+		
+		JBJustifier_absence = new JButton("Justifier absence");
+		panel3.add(JBJustifier_absence);
+		JBJustifier_absence.addActionListener(this);
+		
+		//ajout du label pour l'affichage des erreurs
+		absencesErreur = new JLabel();
+		absencesErreur.setForeground(Color.RED);
+		absencesErreur.setHorizontalAlignment(SwingConstants.CENTER);
+		JPAbsences.add(absencesErreur, BorderLayout.NORTH);
+		
+		//ajout du scrollpane avec le trableau
+		JScrollPane scrollPane1 = new JScrollPane();
+		JPAbsences.add(scrollPane1, BorderLayout.CENTER);
+		
+		String [] tabs = {"date","durée","heure","cours","etat","justificatif"};
+		String [][] values = new String[absences.size()][0];
+		modelTableAbsences = new DefaultTableModel(values,tabs);
+		refreshAbsences();
+		JTAbsences = new JTable(modelTableAbsences);
+		scrollPane1.setViewportView(JTAbsences);
 		
 		//JPProfil.setBackground(Color.blue);
 		//JPPlanning.setBackground(Color.red);
-		JPAbsences.setBackground(Color.pink);
+		//JPAbsences.setBackground(Color.pink);
 		JPNotes.setBackground(Color.CYAN);
 		
 		JPanel panel = new BackgroundPanel();
@@ -275,6 +319,7 @@ public class UIEtudiant extends JFrame implements ActionListener{
 		content.add(JPAbsences,listeCard[2]);
 		content.add(JPNotes,listeCard[3]);
 		
+		JBProfil.setEnabled(false);
 		this.getContentPane().add(panel, BorderLayout.NORTH);
 		this.getContentPane().add(content,BorderLayout.CENTER);
 		this.setVisible(true);
@@ -321,6 +366,47 @@ public class UIEtudiant extends JFrame implements ActionListener{
 			this.dispose();
 			new UILogin();
 		}
+		
+		if(e.getSource() == JBAnticiper_absence) {
+			new UIAnticiperAbsence(profil.getID(),totSeances,cours,this);
+		}
+	}
+	
+	public void refreshAbsences() {
+		
+		absences = new BDDAbsencesEleve(this.profil.getID()).getAbsences();
+		
+		while(modelTableAbsences.getRowCount() > 0)
+		modelTableAbsences.removeRow(modelTableAbsences.getRowCount()-1);
+		
+		for(int i = 0; i < absences.size(); i++) {
+			int indexSeances = 0;
+			int indexCours = 0;
+			while(absences.get(i).getIdSeance() != totSeances.get(indexSeances).getID()) {
+				indexSeances++;
+			}
+			while(totSeances.get(indexSeances).getIDCours() != cours.get(indexCours).getID()) {
+				indexCours++;
+			}
+			String[] values = new String[6];
+			values[0] = totSeances.get(indexSeances).getDate();
+			values[1] = totSeances.get(indexSeances).getDuree()+"h";
+			values[2] = totSeances.get(indexSeances).getHeure()+"h30";
+			values[3] = cours.get(indexCours).getMatiere();
+			if(absences.get(i).getEtat()) {
+				values[4] = "Justifié";
+			}else {
+				values[4] = "Non justifié";
+			}
+			
+			if(absences.get(i).getJustificatif() == null) {
+				values[5] = "Aucun justificatif déposé";
+			}else {
+				values[5] = "Justificatif en ligne";
+			}
+			modelTableAbsences.addRow(values);
+		}
+		
 	}
 
 }

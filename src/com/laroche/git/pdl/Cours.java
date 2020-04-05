@@ -57,5 +57,13 @@ public class Cours {
 	public ArrayList<Seance> getSeances(){
 		return this.seances;
 	}
+	
+	public void setID(int ID) {
+		this.idCours = ID;
+	}
+	
+	public int getID() {
+		return this.idCours;
+	}
 
 }

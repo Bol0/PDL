@@ -3,14 +3,16 @@ package com.laroche.git.pdl;
 public class Seance {
 	
 	private String date,salle,type;
-	int duree,heure; //en heure
+	int duree,heure,id,idCours; //en heure
 	
-	public Seance(String date, int heure, String salle, String type, int duree){
+	public Seance(String date, int heure, String salle, String type, int duree,int id,int idCours){
 		this.date = date;
 		this.heure = heure;
 		this.salle = salle;
 		this.type = type;
 		this.duree = duree;
+		this.id = id;
+		this.idCours = idCours;
 	}
 
 	public String getDate() {
@@ -53,5 +55,20 @@ public class Seance {
 		this.duree = duree;
 	}
 
+	public int getID() {
+		return this.id;
+	}
+	
+	public void setID(int id) {
+		this.id = id;
+	}
+	
+	public int getIDCours() {
+		return this.idCours;
+	}
+	
+	public void setIDCours(int id) {
+		this.idCours = id;
+	}
 	
 }

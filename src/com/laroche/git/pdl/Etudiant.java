@@ -3,12 +3,13 @@ package com.laroche.git.pdl;
 public class Etudiant extends Personne{
 
 	private boolean filiere; //true --> classique, false --> alternance
-	private int groupe;
+	private int groupe,id;
 	
 	public Etudiant(String prenom, String nom, boolean filiere, int groupe) {
 		super(nom, prenom);
 		this.filiere = filiere;
 		this.groupe = groupe;
+		id = 0;
 	}
 	
 	public Etudiant(String prenom, String nom) {
@@ -31,6 +32,14 @@ public class Etudiant extends Personne{
 	
 	public void setGroupe(int numero) {
 		this.groupe = numero;
+	}
+	
+	public void setID(int id) {
+		this.id = id;
+	}
+	
+	public int getID() {
+		return this.id;
 	}
 	
 }
