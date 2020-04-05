@@ -50,8 +50,9 @@ public class UIAnticiperAbsence extends JFrame implements ActionListener{
 		JBValider.setEnabled(false);
 		this.add(JBValider, BorderLayout.SOUTH);
 		
-		JPanel panel = new JPanel();
+		JPanel panel = new BackgroundPanel();
 		this.add(panel, BorderLayout.CENTER);
+		
 		panel.setLayout(new GridLayout(4, 2, 10, 10));
 		
 		//ajout de la section jours :
@@ -137,7 +138,6 @@ public class UIAnticiperAbsence extends JFrame implements ActionListener{
 		}
 		
 		if(e.getSource() == JBJustificatif) {
-			System.out.println("pipo");
 			JFileChooser fc = new JFileChooser();
 			 int returnVal = fc.showOpenDialog(null);
 		        if(returnVal == JFileChooser.APPROVE_OPTION) {

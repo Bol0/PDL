@@ -1,5 +1,6 @@
 package com.laroche.git.pdl;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,7 +10,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Blob;
+import java.sql.Connection;
 import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -130,26 +133,21 @@ public class BDD {
 		return fichier;
 	}
 	
-	public void postBlob(String directory, String args) throws FileNotFoundException, SQLException {
-		 connection.setReadOnly(false);
-		 Statement stmt = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
-		 ResultSet rs = stmt.executeQuery(args);
-		 rs.absolute(1);
-		 
-		 byte[] data;
-		try {
-			data = Files.readAllBytes(Paths.get(directory));
-			Blob blob = new SerialBlob(data);
-			rs.updateBlob(1, blob);
-			rs.updateRow();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		 
-	     
-		 
+	public void postBlob(String path, int id_absence) {
+		String updateSQL = "UPDATE absence " + "SET justificatif_absence = ? " + "WHERE id_absence=?";
+		
+        try (PreparedStatement pstmt = connection.prepareStatement(updateSQL)) {
+ 
+            // set parameters
+            pstmt.setBytes(1, readFile(path));
+            pstmt.setInt(2, id_absence);
+            pstmt.executeUpdate();
+ 
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
 	}
+
 	
 	public void reconnect() {
 	    try{
@@ -168,6 +166,30 @@ public class BDD {
 	    	connected = false;
 	      }
 	}
+	
+	
+	 /**
+     * Read the file and returns the byte array
+     * @param file
+     * @return the bytes of the file
+     */
+    private byte[] readFile(String file) {
+        ByteArrayOutputStream bos = null;
+        try {
+            File f = new File(file);
+            FileInputStream fis = new FileInputStream(f);
+            byte[] buffer = new byte[1024];
+            bos = new ByteArrayOutputStream();
+            for (int len; (len = fis.read(buffer)) != -1;) {
+                bos.write(buffer, 0, len);
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println(e.getMessage());
+        } catch (IOException e2) {
+            System.err.println(e2.getMessage());
+        }
+        return bos != null ? bos.toByteArray() : null;
+    }
 
 }
 

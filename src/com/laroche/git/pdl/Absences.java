@@ -59,5 +59,9 @@ public class Absences {
 		this.nomJustificatif = nomJustificatif;
 	}
 	
+	public String getNomJustificatif() {
+		return this.nomJustificatif;
+	}
+	
 
 }

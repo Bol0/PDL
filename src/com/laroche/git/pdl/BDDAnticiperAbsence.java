@@ -27,13 +27,8 @@ public class BDDAnticiperAbsence {
 				}
 			}
 			id_absence ++;
-			try {
-				db.post("INSERT INTO \"HR\".\"ABSENCE\" (ETAT_ABSENCE, ID_ABSENCE, ID_SEANCE, ID_ETUDIANT, NOM_JUSTIFICATIF_ABSENCE, JUSTIFICATIF_ABSENCE) VALUES ('0', '"+id_absence+"', '"+id_seance+"', '"+id_etudiant+"', '"+nomFichier+"','"+Files.readAllBytes(Paths.get(directory))+"')");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			//db.postBlob(directory,"UPDATE \"HR\".\"ABSENCE\" SET JUSTIFICATIF_ABSENCE=? WHERE ID_ABSENCE = "+id_absence);
+			db.post("INSERT INTO \"HR\".\"ABSENCE\" (ETAT_ABSENCE, ID_ABSENCE, ID_SEANCE, ID_ETUDIANT, NOM_JUSTIFICATIF_ABSENCE) VALUES ('0', '"+id_absence+"', '"+id_seance+"', '"+id_etudiant+"', '"+nomFichier+"')");
+			db.postBlob(directory, id_absence);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

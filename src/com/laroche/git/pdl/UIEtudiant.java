@@ -88,7 +88,7 @@ public class UIEtudiant extends JFrame implements ActionListener{
 		JPProfil.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("/Users/bolo/Documents/PDL/phase2/StudentIcone.png"));
+		lblNewLabel.setIcon(new ImageIcon("drawables/StudentIcone.png"));
 		JPProfil.add(lblNewLabel, BorderLayout.WEST);
 		
 		JPanel panel_2 = new JPanel();
@@ -369,6 +369,16 @@ public class UIEtudiant extends JFrame implements ActionListener{
 		
 		if(e.getSource() == JBAnticiper_absence) {
 			new UIAnticiperAbsence(profil.getID(),totSeances,cours,this);
+		}
+		
+		if(e.getSource() == JBJustifier_absence) {
+			int selection = JTAbsences.getSelectedRow();
+			if(selection >= 0) {
+				new UIJustifierAbsence(absences.get(selection),this);
+				absencesErreur.setText("");
+			}else {
+				absencesErreur.setText("Aucune absence selctionné !");
+			}
 		}
 	}
 	
