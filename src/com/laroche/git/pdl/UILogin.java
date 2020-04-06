@@ -103,7 +103,7 @@ public class UILogin extends JFrame implements ActionListener{
 				e1.printStackTrace();
 			}
 			if(!db.isConnected() || db == null) {
-				addErreur("Echec de connection ├а la BDD !");
+				addErreur("Echec de connection ра la BDD !");
 			}else {
 				ArrayList<ArrayList<String>> result = db.request("SELECT * FROM utilisateur WHERE email_user = '"+getEmail()+"'", 6);
 				
@@ -116,7 +116,9 @@ public class UILogin extends JFrame implements ActionListener{
 						System.out.println(statut);
 						switch(statut) {
 						case "gestionnaire":
-							
+							this.setVisible(false);
+							this.dispose();
+							new UIGestionnaire(Integer.parseInt(result.get(0).get(0)));
 							break;
 						case "etudiant":
 							this.setVisible(false);

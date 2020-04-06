@@ -24,9 +24,9 @@ import oracle.jdbc.pool.OracleDataSource;
 
 public class BDD {
 	
-	  private final static String DB_URL= "jdbc:oracle:thin:@192.168.56.101:1521/orcl";
-	  private final static String DB_USER = "hr";
-	  private final static String DB_PASSWORD = "oracle";
+	  private final static String DB_URL= "jdbc:oracle:thin:@127.0.0.1:1521/xe";
+	  private final static String DB_USER = "SYSTEM";
+	  private final static String DB_PASSWORD = "TrouDuc";
 	  private Properties info;
 	  private OracleDataSource ods;
 	  private boolean connected = false;
@@ -130,26 +130,6 @@ public class BDD {
 		return fichier;
 	}
 	
-	public void postBlob(String directory, String args) throws FileNotFoundException, SQLException {
-		 connection.setReadOnly(false);
-		 Statement stmt = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
-		 ResultSet rs = stmt.executeQuery(args);
-		 rs.absolute(1);
-		 
-		 byte[] data;
-		try {
-			data = Files.readAllBytes(Paths.get(directory));
-			Blob blob = new SerialBlob(data);
-			rs.updateBlob(1, blob);
-			rs.updateRow();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		 
-	     
-		 
-	}
 	
 	public void reconnect() {
 	    try{

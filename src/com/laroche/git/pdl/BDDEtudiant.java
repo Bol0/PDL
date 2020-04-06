@@ -49,10 +49,20 @@ public class BDDEtudiant {
 		return this.studentID;
 	}
 	
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setEtudiant(Etudiant etudiant) {
+		this.etudiant = etudiant;
+	}
+	
+	public void setStudentID(int studentID) {
+		this.studentID = studentID;
+	}
 	public void setUserID(int id) {
 		this.userID = id;
 	}
-	
-	
+
 	
 }

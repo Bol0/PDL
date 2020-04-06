@@ -1,6 +1,6 @@
 package com.laroche.git.pdl;
 
-public abstract class Personne {
+public class Personne {
 
 	protected String nom,prenom;
 	
