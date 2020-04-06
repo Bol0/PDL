@@ -3,12 +3,12 @@ package com.laroche.git.pdl;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class BDDEtudiant {
+public class EtudiantDAO {
 
 	private int userID,studentID;
 	private Etudiant etudiant;
 	
-	public BDDEtudiant(int userID) {
+	public EtudiantDAO(int userID) {
 		this.userID = userID;
 		etudiant = new Etudiant("nom","prenom",true,0);
 		refreshEtudiant();

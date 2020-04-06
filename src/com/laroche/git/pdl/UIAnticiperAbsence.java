@@ -157,7 +157,7 @@ public class UIAnticiperAbsence extends JFrame implements ActionListener{
 					id_seance = seances.get(i).getID();
 				}
 			}
-			new BDDAnticiperAbsence(id_seance,id_etudiant,directory,name);
+			new AnticiperAbsenceDAO(id_seance,id_etudiant,directory,name);
 			
 			
 			//on ajoute l'absence a la liste

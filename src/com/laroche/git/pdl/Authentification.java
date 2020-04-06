@@ -5,9 +5,10 @@ public class Authentification {
 	private String email, mdp;
 	private String statut = null;
 	
-	public Authentification(String email, String mdp) {
+	public Authentification(String email, String mdp, String statut) {
 		this.email = email;
 		this.mdp = mdp;
+		this.statut = statut;
 		
 		//connection sql :
 		connection();
@@ -21,8 +22,16 @@ public class Authentification {
 		this.mdp = mdp;
 	}
 	
+	public void setStatut(String statut) {
+		this.statut = statut;
+	}
+	
 	public String getEmail() {
 		return this.email;
+	}
+	
+	public String getMDP() {
+		return this.mdp;
 	}
 	
 	public String getStatut() {

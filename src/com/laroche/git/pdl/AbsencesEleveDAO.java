@@ -4,12 +4,12 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class BDDAbsencesEleve {
+public class AbsencesEleveDAO {
 	
 	private ArrayList<Absences> absences;
 	private int id;
 	
-	public BDDAbsencesEleve(int id) {
+	public AbsencesEleveDAO(int id) {
 		this.id = id;
 		absences = new ArrayList<Absences>();
 		refresh();

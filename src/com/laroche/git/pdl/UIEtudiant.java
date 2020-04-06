@@ -56,16 +56,16 @@ public class UIEtudiant extends JFrame implements ActionListener{
 		modelTableAbsences = new DefaultTableModel();
 		
 		//enregistre le profil de l'etudiant
-		this.profil = new BDDEtudiant(this.userID).getEtudiant();
+		this.profil = new EtudiantDAO(this.userID).getEtudiant();
 		
 		//enregistre le groupe de l'étudiant
-		groupe = new BDDGroupe(this.profil.getGroupe()).getGroupe();
+		groupe = new GroupeDAO(this.profil.getGroupe()).getGroupe();
 		
 		//récupération des cours
 		cours = this.groupe.getCours();
 		
 		//récupération des absences
-		absences = new BDDAbsencesEleve(this.profil.getID()).getAbsences();
+		absences = new AbsencesEleveDAO(this.profil.getID()).getAbsences();
 		
 		
 		this.setSize(550, 300);
@@ -384,7 +384,7 @@ public class UIEtudiant extends JFrame implements ActionListener{
 	
 	public void refreshAbsences() {
 		
-		absences = new BDDAbsencesEleve(this.profil.getID()).getAbsences();
+		absences = new AbsencesEleveDAO(this.profil.getID()).getAbsences();
 		
 		while(modelTableAbsences.getRowCount() > 0)
 		modelTableAbsences.removeRow(modelTableAbsences.getRowCount()-1);

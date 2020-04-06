@@ -116,7 +116,9 @@ public class UILogin extends JFrame implements ActionListener{
 						System.out.println(statut);
 						switch(statut) {
 						case "gestionnaire":
-							
+							this.setVisible(false);
+							this.dispose();
+							new UIGestionnaire(Integer.parseInt(result.get(0).get(0)));
 							break;
 						case "etudiant":
 							this.setVisible(false);

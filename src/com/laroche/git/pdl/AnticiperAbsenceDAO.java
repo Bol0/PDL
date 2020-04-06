@@ -8,13 +8,13 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class BDDAnticiperAbsence {
+public class AnticiperAbsenceDAO {
 	
 	private Blob fichier;
 	private String nomFichier;
 	private int id_seance,idEtudiant,id_absence;
 	
-	public BDDAnticiperAbsence(int id_seance,int id_etudiant,String directory,String nomFichier) {
+	public AnticiperAbsenceDAO(int id_seance,int id_etudiant,String directory,String nomFichier) {
 		try {
 			BDD db = new BDD();
 			//on calcule la primary key

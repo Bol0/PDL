@@ -3,12 +3,12 @@ package com.laroche.git.pdl;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class BDDGroupe {
+public class GroupeDAO {
 
 	private int numero_groupe;
 	private Groupe groupe;
 	
-	public BDDGroupe(int numero) {
+	public GroupeDAO(int numero) {
 		this.numero_groupe = numero;
 		groupe = new Groupe(this.numero_groupe,0);
 		refreshGroupe();
@@ -32,7 +32,7 @@ public class BDDGroupe {
 				String matiere = result.get(i).get(1);
 				int masseHoraire = Integer.parseInt(result.get(i).get(2));
 				Cours cours = new Cours(matiere,masseHoraire, idCours);
-				ArrayList<Seance> seances = new BDDSeance(idCours).getSeances();
+				ArrayList<Seance> seances = new SeanceDAO(idCours).getSeances();
 				cours.setSeances(seances);
 				this.groupe.addCours(cours);
 			}
