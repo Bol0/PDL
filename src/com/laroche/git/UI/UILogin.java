@@ -1,4 +1,4 @@
-package com.laroche.git.pdl;
+package com.laroche.git.UI;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import com.laroche.git.DAO.BDD;
 
 public class UILogin extends JFrame implements ActionListener{
 	

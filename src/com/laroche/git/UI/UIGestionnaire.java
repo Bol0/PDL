@@ -1,69 +1,39 @@
-package com.laroche.git.pdl;
+package com.laroche.git.UI;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-//import java.beans.Statement;
-//import javax.sql.*;
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.Statement;
+import java.util.ArrayList;
 
-
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableModel;
-
-//import com.sun.jdi.connect.spi.Connection;
-import oracle.jdbc.OracleConnection;
-import oracle.jdbc.pool.OracleDataSource;
-
-import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.sql.Blob;
-import java.sql.DatabaseMetaData;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Properties;
-
-import javax.sql.rowset.serial.SerialBlob;
+import com.laroche.git.DAO.AuthentificationDAO;
+import com.laroche.git.DAO.suppEtudiantDAO;
+import com.laroche.git.objets.Authentification;
+import com.laroche.git.objets.Personne;
 
 
 
 public class UIGestionnaire extends JFrame implements ActionListener{
 	
-	private int LARGEUR_FENETRE = 450;
-	private int HAUTEUR_FENETRE = 300;
+	private int LARGEUR_FENETRE = 625;
+	private int HAUTEUR_FENETRE = 450;
 	
 	private int userID;
 	private JButton JBGerer,JBAbsences,JBGroupes,JBDeconnexion;

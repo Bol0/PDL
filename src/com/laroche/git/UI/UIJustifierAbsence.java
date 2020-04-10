@@ -1,14 +1,12 @@
-package com.laroche.git.pdl;
+package com.laroche.git.UI;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -16,6 +14,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+import com.laroche.git.DAO.BDD;
+import com.laroche.git.objets.Absences;
 
 public class UIJustifierAbsence extends JFrame implements ActionListener{
 	

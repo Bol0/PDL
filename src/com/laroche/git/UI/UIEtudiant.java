@@ -1,18 +1,14 @@
-package com.laroche.git.pdl;
+package com.laroche.git.UI;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -25,13 +21,20 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+
+import com.laroche.git.DAO.AbsencesEleveDAO;
+import com.laroche.git.DAO.EtudiantDAO;
+import com.laroche.git.DAO.GroupeDAO;
+import com.laroche.git.DAO.NotesDAO;
+import com.laroche.git.objets.Absences;
+import com.laroche.git.objets.Cours;
+import com.laroche.git.objets.Etudiant;
+import com.laroche.git.objets.Groupe;
+import com.laroche.git.objets.Note;
+import com.laroche.git.objets.Seance;
 
 
 public class UIEtudiant extends JFrame implements ActionListener{
@@ -45,10 +48,11 @@ public class UIEtudiant extends JFrame implements ActionListener{
 	private Groupe groupe;
 	private ArrayList<Cours> cours;
 	private JLabel absencesErreur;
-	private JTable JTAbsences;
+	private JTable JTAbsences,JTNotes;
 	private ArrayList<Absences> absences;
 	private ArrayList<Seance> totSeances;
-	private DefaultTableModel modelTableAbsences;
+	private ArrayList<Note> totNotes;
+	private DefaultTableModel modelTableAbsences,modelTableNotes;
 	
 	public UIEtudiant(int userID) {
 		this.userID = userID;
@@ -67,6 +71,11 @@ public class UIEtudiant extends JFrame implements ActionListener{
 		//récupération des absences
 		absences = new AbsencesEleveDAO(this.profil.getID()).getAbsences();
 		
+		//récuperation des notes
+		NotesDAO notesDao = new NotesDAO();
+		notesDao.refreshList(this.profil.getID());
+		totNotes = notesDao.getNotes();
+		
 		
 		this.setSize(550, 300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -84,7 +93,7 @@ public class UIEtudiant extends JFrame implements ActionListener{
 		
 		//On definit chaque JPanel : Profil, Planning et absences
 		
-		//affichage du profil			******************************
+		//affichage du profil			***********************************************************************
 		JPProfil.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNewLabel = new JLabel("");
@@ -118,7 +127,7 @@ public class UIEtudiant extends JFrame implements ActionListener{
 		lblGroupe.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		
-		//affichage du planning			******************************
+		//affichage du planning			*******************************************************************************
 		JPPlanning.setLayout(new BorderLayout(0, 0));
 		JScrollPane scrollPane = new JScrollPane();
 		JPPlanning.add(scrollPane, BorderLayout.WEST);
@@ -146,7 +155,7 @@ public class UIEtudiant extends JFrame implements ActionListener{
 		JPPlanning.add(panel2, BorderLayout.CENTER);
 		panel2.setLayout(new GridLayout(12, 6, 0, 0));
 		
-		//testtttttttttttttt
+		//creation des cellules du tableau et initialisation
 		JLabel[][] cellules = new JLabel[6][12];
 		
 		for(int i = 0; i < 12; i++) {
@@ -255,7 +264,7 @@ public class UIEtudiant extends JFrame implements ActionListener{
 		});
 		
 		
-		//affichage des absences **************************************
+		//affichage des absences *****************************************************************************
 		JPAbsences.setLayout(new BorderLayout());
 		
 		//ajout du panel du bas avec ses boutons
@@ -288,10 +297,24 @@ public class UIEtudiant extends JFrame implements ActionListener{
 		JTAbsences = new JTable(modelTableAbsences);
 		scrollPane1.setViewportView(JTAbsences);
 		
+		//affichage des notes ********************************************************************************
+		
+		JPNotes.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane scrollPane2 = new JScrollPane();
+		JPNotes.add(scrollPane2, BorderLayout.CENTER);
+		
+		String [] tabs2 = {"date","cours","notes"};
+		String [][] values2 = new String[totNotes.size()][0];
+		modelTableNotes = new DefaultTableModel(values2,tabs2);
+		refreshNotes();
+		JTNotes = new JTable(modelTableNotes);
+		scrollPane2.setViewportView(JTNotes);
+		
 		//JPProfil.setBackground(Color.blue);
 		//JPPlanning.setBackground(Color.red);
 		//JPAbsences.setBackground(Color.pink);
-		JPNotes.setBackground(Color.CYAN);
+		//JPNotes.setBackground(Color.CYAN);
 		
 		JPanel panel = new BackgroundPanel();
 		panel.setLayout(new FlowLayout());
@@ -324,6 +347,8 @@ public class UIEtudiant extends JFrame implements ActionListener{
 		this.getContentPane().add(content,BorderLayout.CENTER);
 		this.setVisible(true);
 	}
+
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -415,6 +440,35 @@ public class UIEtudiant extends JFrame implements ActionListener{
 				values[5] = "Justificatif en ligne";
 			}
 			modelTableAbsences.addRow(values);
+		}
+		
+	}
+	
+	private void refreshNotes() {
+		// TODO Auto-generated method stub
+		NotesDAO notesDao = new NotesDAO();
+		notesDao.refreshList(this.profil.getID());
+		totNotes = notesDao.getNotes();
+		
+		//afface le tableau existant
+		while(modelTableNotes.getRowCount() > 0)
+			modelTableNotes.removeRow(modelTableNotes.getRowCount()-1);
+		System.out.println(totNotes.toString());
+		for(int ligne = 0; ligne < totNotes.size(); ligne++) {
+			int indexSeance = 0;
+			int indexCour = 0;
+			while(totNotes.get(ligne).getIdSeance() != totSeances.get(indexSeance).getID()) {
+				indexSeance++;
+			}
+			while(totSeances.get(indexSeance).getIDCours() != cours.get(indexCour).getID()) {
+				indexCour++;
+			}
+			
+			String[] values2 = new String[3];
+			values2[0] = totSeances.get(indexSeance).getDate();
+			values2[1] = cours.get(indexCour).getMatiere();
+			values2[2] = Float.toString(totNotes.get(ligne).getNote());
+			modelTableNotes.addRow(values2);
 		}
 		
 	}

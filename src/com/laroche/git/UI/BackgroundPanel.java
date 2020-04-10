@@ -1,4 +1,4 @@
-package com.laroche.git.pdl;
+package com.laroche.git.UI;
 
 import java.awt.Graphics;
 import java.awt.Image;

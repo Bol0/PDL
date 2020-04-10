@@ -1,4 +1,4 @@
-package com.laroche.git.pdl;
+package com.laroche.git.UI;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -16,6 +16,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+import com.laroche.git.DAO.AnticiperAbsenceDAO;
+import com.laroche.git.objets.Absences;
+import com.laroche.git.objets.Cours;
+import com.laroche.git.objets.Seance;
 
 public class UIAnticiperAbsence extends JFrame implements ActionListener{
 

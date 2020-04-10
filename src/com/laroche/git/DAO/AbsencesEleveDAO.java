@@ -1,8 +1,10 @@
-package com.laroche.git.pdl;
+package com.laroche.git.DAO;
 
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import com.laroche.git.objets.Absences;
 
 public class AbsencesEleveDAO {
 	

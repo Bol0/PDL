@@ -1,4 +1,4 @@
-package com.laroche.git.pdl;
+package com.laroche.git.DAO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

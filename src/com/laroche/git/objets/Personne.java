@@ -1,4 +1,4 @@
-package com.laroche.git.pdl;
+package com.laroche.git.objets;
 
 public class Personne {
 

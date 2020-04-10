@@ -1,4 +1,4 @@
-package com.laroche.git.pdl;
+package com.laroche.git.UI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -17,6 +17,12 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import com.laroche.git.DAO.ajoutEtudiantDAO;
+import com.laroche.git.DAO.listeGroupeDAO;
+import com.laroche.git.objets.Authentification;
+import com.laroche.git.objets.Etudiant;
+import com.laroche.git.objets.Groupe;
 
 public class UIAjoutEtudiant extends JFrame implements ActionListener{
 	
