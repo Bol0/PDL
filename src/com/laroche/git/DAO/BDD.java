@@ -133,8 +133,8 @@ public class BDD {
 		return fichier;
 	}
 	
-<<<<<<< HEAD:src/com/laroche/git/pdl/BDD.java
-=======
+
+	
 	public void postBlob(String path, int id_absence) {
 		String updateSQL = "UPDATE absence " + "SET justificatif_absence = ? " + "WHERE id_absence=?";
 		
@@ -150,7 +150,6 @@ public class BDD {
         }
 	}
 
->>>>>>> 47c01c81d0383f523232a5ee07eed8a63b443865:src/com/laroche/git/DAO/BDD.java
 	
 	public void reconnect() {
 	    try{
