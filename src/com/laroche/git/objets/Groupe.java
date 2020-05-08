@@ -1,5 +1,11 @@
 package com.laroche.git.objets;
 
+/**
+ * The "Groupe" class is used to store group data like : group_number, classes_list
+ * 
+ * @author LAROCHE Corentin, LEBRUN Juliette
+ * @version 1.0
+ */
 import java.util.ArrayList;
 
 public class Groupe {

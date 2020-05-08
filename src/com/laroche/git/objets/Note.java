@@ -1,5 +1,11 @@
 package com.laroche.git.objets;
 
+/**
+ * The "Note" class is used to store notes data like : Note_id, student_id
+ * 
+ * @author LAROCHE Corentin, LEBRUN Juliette
+ * @version 1.0
+ */
 public class Note {
 
 	private Float note;

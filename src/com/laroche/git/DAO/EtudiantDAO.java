@@ -1,5 +1,11 @@
 package com.laroche.git.DAO;
 
+/**
+ * The "EtudiantDao" is used to retrieve student data stored in the sql database
+ * 
+ * @author LAROCHE Corentin, LEBRUN Juliette
+ * @version 1.0
+ */
 import java.sql.SQLException;
 import java.util.ArrayList;
 
