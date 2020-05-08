@@ -1,5 +1,11 @@
 package com.laroche.git.objets;
 
+/**
+ * The "Seance" class is used to store seance data like : seance_id, date, time
+ * 
+ * @author LAROCHE Corentin, LEBRUN Juliette
+ * @version 1.0
+ */
 public class Seance {
 	
 	private String date,salle,type;

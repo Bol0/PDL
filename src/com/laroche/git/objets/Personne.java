@@ -1,5 +1,11 @@
 package com.laroche.git.objets;
 
+/**
+ * The "Personne" class is used to store user data like : first_name, last_name
+ * 
+ * @author LAROCHE Corentin, LEBRUN Juliette
+ * @version 1.0
+ */
 public class Personne {
 
 	protected String nom,prenom;
