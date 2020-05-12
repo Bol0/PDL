@@ -13,7 +13,7 @@ public class listeGroupeDAO {
 		this.listeGroupe = new ArrayList<Groupe>();
 	}
 	
-	public ArrayList<Groupe> getList(){
+	public static ArrayList<Groupe> getList(){
 		BDD db;
 		ArrayList<Groupe> groupes = null;
 		try {
