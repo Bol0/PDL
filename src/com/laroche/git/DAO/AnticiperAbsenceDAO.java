@@ -27,7 +27,7 @@ public class AnticiperAbsenceDAO {
 				}
 			}
 			id_absence ++;
-			db.post("INSERT INTO \"HR\".\"ABSENCE\" (ETAT_ABSENCE, ID_ABSENCE, ID_SEANCE, ID_ETUDIANT, NOM_JUSTIFICATIF_ABSENCE) VALUES ('0', '"+id_absence+"', '"+id_seance+"', '"+id_etudiant+"', '"+nomFichier+"')");
+			db.post("INSERT INTO \"SYSTEM\".\"ABSENCE\" (ETAT_ABSENCE, ID_ABSENCE, ID_SEANCE, ID_ETUDIANT, NOM_JUSTIFICATIF_ABSENCE) VALUES ('0', '"+id_absence+"', '"+id_seance+"', '"+id_etudiant+"', '"+nomFichier+"')");
 			db.postBlob(directory, id_absence);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

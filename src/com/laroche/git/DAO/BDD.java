@@ -29,7 +29,7 @@ public class BDD {
 	
 	  private final static String DB_URL= "jdbc:oracle:thin:@127.0.0.1:1521/xe";
 	  private final static String DB_USER = "SYSTEM";
-	  private final static String DB_PASSWORD = "TrouDuc";
+	  private final static String DB_PASSWORD = "";
 	  private Properties info;
 	  private OracleDataSource ods;
 	  private boolean connected = false;
@@ -133,8 +133,7 @@ public class BDD {
 		return fichier;
 	}
 	
-<<<<<<< HEAD:src/com/laroche/git/pdl/BDD.java
-=======
+
 	public void postBlob(String path, int id_absence) {
 		String updateSQL = "UPDATE absence " + "SET justificatif_absence = ? " + "WHERE id_absence=?";
 		
@@ -150,8 +149,7 @@ public class BDD {
         }
 	}
 
->>>>>>> 47c01c81d0383f523232a5ee07eed8a63b443865:src/com/laroche/git/DAO/BDD.java
-	
+
 	public void reconnect() {
 	    try{
 	        // Get the JDBC driver name and version 
