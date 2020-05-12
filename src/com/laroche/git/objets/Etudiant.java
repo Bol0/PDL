@@ -1,5 +1,11 @@
 package com.laroche.git.objets;
 
+/**
+ * The "Etudiant" class is used to store student data like : Student_id, name, group_number
+ * 
+ * @author LAROCHE Corentin, LEBRUN Juliette
+ * @version 1.0
+ */
 public class Etudiant extends Personne{
 
 	private boolean filiere; //true --> classique, false --> alternance
